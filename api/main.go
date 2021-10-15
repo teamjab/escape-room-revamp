@@ -16,7 +16,7 @@ func homepage(w http.ResponseWriter, r *http.Request) {
 
 func requestHandler() {
 	router := mux.NewRouter()
-	router.HandleFunc("/", homepage).Methods("GET")
+	router.HandleFunc("/", homepage)
 
 	originsOk := handlers.AllowedOrigins([]string{"http://localhost:3000"})
 	methodsOk := handlers.AllowedMethods([]string{"GET", "POST"})
