@@ -2,8 +2,8 @@
 
 ## Author
 
-- Jin Kim
 - Brendon Hampton
+- Jin Kim
 
 ## Links and Resources
 
