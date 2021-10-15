@@ -4,6 +4,7 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
 )
 
@@ -16,7 +17,11 @@ func homepage(w http.ResponseWriter, r *http.Request) {
 func requestHandler() {
 	router := mux.NewRouter()
 	router.HandleFunc("/", homepage).Methods("GET")
-	log.Fatal(http.ListenAndServe(":8080", router))
+
+	originsOk := handlers.AllowedOrigins([]string{"http://localhost:3000"})
+	methodsOk := handlers.AllowedMethods([]string{"GET", "POST"})
+
+	log.Fatal(http.ListenAndServe(":8080", handlers.CORS(originsOk, methodsOk)(router)))
 }
 
 func main() {
