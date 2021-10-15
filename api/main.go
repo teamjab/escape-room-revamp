@@ -6,7 +6,6 @@ import (
 
 	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
-	"github.com/teamjab/escape-room-revamp/models"
 )
 
 func homepage(w http.ResponseWriter, r *http.Request) {
