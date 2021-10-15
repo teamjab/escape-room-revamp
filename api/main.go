@@ -16,7 +16,7 @@ func homepage(w http.ResponseWriter, r *http.Request) {
 func requestHandler() {
 	router := mux.NewRouter()
 	router.HandleFunc("/", homepage).Methods("GET")
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	log.Fatal(http.ListenAndServe(":8080", router))
 }
 
 func main() {
