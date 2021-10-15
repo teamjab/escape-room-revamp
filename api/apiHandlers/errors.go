@@ -1,4 +1,4 @@
-package errors
+package ApiHandlers
 
 import (
 	"encoding/json"
@@ -10,31 +10,31 @@ import (
 var (
 	// 500 Error
 	InternalErr = &Error{
-		Code: http.StatusInternalServerError,
+		Code:    http.StatusInternalServerError,
 		Message: "Something went wrong on our side, but you probabaly broke it.",
 	}
 
 	// 422 Error
 	EntityUnprocessabeErr = &Error{
-		Code: http.StatusUnprocessableEntity,
+		Code:    http.StatusUnprocessableEntity,
 		Message: "Unprocessable Entity",
 	}
 
 	// 404 Error
 	NotFoundErr = &Error{
-		Code: http.StatusNotFound,
+		Code:    http.StatusNotFound,
 		Message: "Not found!",
 	}
 
-	// 400 Error 
+	// 400 Error
 	ObjectNotFoundErr = &Error{
-		Code: http.StatusBadRequest,
+		Code:    http.StatusBadRequest,
 		Message: "Request should provide entity",
 	}
 )
 
 type Error struct {
-	Code int // this is status code,
+	Code    int    // this is status code,
 	Message string // this is error message
 }
 
