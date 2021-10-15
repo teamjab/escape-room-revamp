@@ -3,6 +3,10 @@ import "./App.css";
 
 function App() {
   console.log(userForm);
+  // simple fetch
+  fetch('http://localhost:8080/')
+  .then(response => response.json())
+  .then(data => console.log(data));
   return (
     <div className="App">
       <header className="App-header"></header>
