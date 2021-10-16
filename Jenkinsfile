@@ -4,9 +4,9 @@ pipeline {
         stage('Build') {
             steps {
                 sh '''
-                which npm
                 cd "escape-room"
-                /usr/bin/npm install -y
+                sudo apt install npm
+                npm install -y
                 echo "Done Installing packages"
                 '''
             }
