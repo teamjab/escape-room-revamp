@@ -1,25 +1,32 @@
 pipeline {
-    stages {
-        stage('Jest Unit Test') {
-            steps {
-                cd escape-room
+    agent any
 
-            }
-        }
-        
-        stage('Build') {
+    environment {
+        APP_NAME = "escape-room"
+    }
+
+    stages {
+        stage('npm package install') {
             steps {
-                echo 'Building..'
+                sh '''
+                echo "Installing Packages..."
+                cd "${APP_NAME}"
+                npm install -y
+                '''
             }
         }
         stage('Test') {
             steps {
-                echo 'Testing..'
+                sh '''
+                echo "JS unit test..."
+                cd "${APP_NAME}"
+                npm run test
+                '''
             }
         }
         stage('Deploy') {
             steps {
-                echo 'Deploying....'
+                echo 'Deploying...'
             }
         }
     }
