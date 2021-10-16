@@ -39,8 +39,8 @@ pipeline {
         stage('Building image') {
             steps {
                 sh '''
-                docker.build registry + ":$BUILD_NUMBER"
-
+                docker build -t escape-room .
+                docker tag escape-room $DOCKER_REGISTRY
                 '''
             }
         }
