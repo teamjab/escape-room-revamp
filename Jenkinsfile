@@ -17,7 +17,11 @@ pipeline {
         }
         stage('Test') {
             steps {
-                echo 'Testing..'
+                sh '''
+                echo "JS unit test..."
+                cd "${APP_NAME}"
+                npm run test
+                '''
             }
         }
         stage('Deploy') {
