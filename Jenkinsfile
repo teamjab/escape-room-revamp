@@ -4,7 +4,7 @@ pipeline {
         stage('setup phase') {
             steps {
                 sh '''
-                export PATH=/usr/local/bin
+                export PATH=/usr/bin
                 '''
             }
         }
