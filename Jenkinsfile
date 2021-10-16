@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        APP_NAME: "escape-room"
+        APP_NAME = "escape-room"
     }
 
     stages {
