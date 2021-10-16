@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Jest Unit Test') {
             steps {
-                cd escape-room
+                cd "escape-room"
 
             }
         }
