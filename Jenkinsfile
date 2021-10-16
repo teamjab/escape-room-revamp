@@ -45,8 +45,8 @@ pipeline {
             }
         }
         stage('Deploy FE application') {
-            withCredentials([usernameColonPassword(credentialsId: 'heroku', variable: 'HEROKU_PASS')]) {
             steps {
+                withCredentials([usernameColonPassword(credentialsId: 'heroku', variable: 'HEROKU_PASS')]) {
                 sh '''
                 docker login --username=_ --password=$HEROKU_PASS registry.heroku.com
                 heroku container:push web -a $APP_NAME
