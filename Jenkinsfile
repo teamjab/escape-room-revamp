@@ -12,7 +12,7 @@ pipeline {
             steps {
                 sh '''
                 cd "escape-room"
-                npm install -y
+                /usr/bin/npm install -y
                 echo "Done Installing packages"
                 '''
             }
