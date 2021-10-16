@@ -27,6 +27,16 @@ pipeline {
                 '''
             }
         }
+        stage('Deploy FE application') {
+            steps {
+                sh '''
+                cd "${APP_NAME}"
+                netlify init \
+                    && netlify build \
+                    && netlify deploy
+                '''
+            }
+        }
         stage('Go Unit Test') {
             steps {
                 sh '''
