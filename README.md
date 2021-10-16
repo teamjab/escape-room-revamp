@@ -8,7 +8,7 @@
 ## Links and Resources
 
 - [Application Website]()
-- [ci/cd]() (GitHub Actions)
+- [ci/cd]() (Jenkins)
 - [back-end server url](http://xyz.com) (when applicable)
 - [front-end application](http://xyz.com) (when applicable)
 
