@@ -5,7 +5,6 @@ pipeline {
             steps {
                 sh '''
                 cd "escape-room"
-                sudo apt install npm
                 npm install -y
                 echo "Done Installing packages"
                 '''
