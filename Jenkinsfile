@@ -4,6 +4,8 @@ pipeline {
     environment {
         APP_NAME = "escape-room"
         API_NAME = "api"
+        DOCKER_REGISTRY = "teamjab/escape-room"
+        DOCKER_REGISTRY_CREDS = 'dockerhub'
     }
 
     stages {
@@ -34,9 +36,12 @@ pipeline {
                 '''
             }
         }
-        stage('Deploy') {
+        stage('Building image') {
             steps {
-                echo 'Deploying...'
+                sh '''
+                docker.build registry + ":$BUILD_NUMBER"
+
+                '''
             }
         }
     }
