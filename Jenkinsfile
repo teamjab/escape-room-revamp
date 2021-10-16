@@ -27,16 +27,6 @@ pipeline {
                 '''
             }
         }
-        stage('Deploy FE application') {
-            steps {
-                sh '''
-                cd "${APP_NAME}"
-                netlify init \
-                    && netlify build \
-                    && netlify deploy
-                '''
-            }
-        }
         stage('Go Unit Test') {
             steps {
                 sh '''
@@ -53,6 +43,17 @@ pipeline {
                 docker tag escape-room $DOCKER_REGISTRY
                 '''
             }
+        }
+        stage('Deploy FE application') {
+            withCredentials([usernameColonPassword(credentialsId: 'heroku', variable: 'HEROKU_PASS')]) {
+            steps {
+                sh '''
+                docker login --username=_ --password=$HEROKU_PASS registry.heroku.com
+                heroku container:push web -a $APP_NAME
+                heroku container:release web -a $APP_NAME
+                '''
+            }
+          }
         }
     }
 }
