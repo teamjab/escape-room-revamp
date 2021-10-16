@@ -4,7 +4,7 @@ WORKDIR /app
 
 ENV PATH /app/node_modules/.bin:$PATH
 
-COPY package.json ./
+COPY ./escape-room/package.json ./
 
 COPY ./escape-room/package-lock.json ./
 

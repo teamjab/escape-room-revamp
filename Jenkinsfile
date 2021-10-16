@@ -15,12 +15,19 @@ pipeline {
                 '''
             }
         }
-        stage('Test') {
+        stage('JS Unit Test') {
             steps {
                 sh '''
                 echo "JS unit test..."
                 cd "${APP_NAME}"
                 npm run test
+                '''
+            }
+        }
+        stage('Go Unit Test') {
+            steps {
+                sh '''
+                go test ./...
                 '''
             }
         }
