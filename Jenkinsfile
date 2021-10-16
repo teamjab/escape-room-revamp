@@ -3,6 +3,7 @@ pipeline {
 
     environment {
         APP_NAME = "escape-room"
+        API_NAME = "api"
     }
 
     stages {
@@ -27,6 +28,7 @@ pipeline {
         stage('Go Unit Test') {
             steps {
                 sh '''
+                cd "${API_NAME}"
                 go test ./...
                 '''
             }
