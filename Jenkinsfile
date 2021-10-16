@@ -1,10 +1,15 @@
 pipeline {
     agent any
+
+    environment {
+        APP_NAME: "escape-room"
+    }
+
     stages {
         stage('Build') {
             steps {
                 sh '''
-                cd "escape-room"
+                cd "${APP_NAME}"
                 npm install -y
                 echo "Done Installing packages"
                 '''
