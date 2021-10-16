@@ -6,12 +6,12 @@ pipeline {
     }
 
     stages {
-        stage('Build') {
+        stage('npm package install') {
             steps {
                 sh '''
+                echo "Installing Packages..."
                 cd "${APP_NAME}"
                 npm install -y
-                echo "Done Installing packages"
                 '''
             }
         }
