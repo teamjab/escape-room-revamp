@@ -10,8 +10,8 @@ COPY ./escape-room/package-lock.json ./
 
 RUN npm install --silent -y
 
-EXPOSE 3000
-
 COPY ./escape-room ./
 
-ENTRYPOINT ["npm", "start"]
+ARG PORT
+
+ENTRYPOINT ["npm", "start", "--port", "${PORT}"]
