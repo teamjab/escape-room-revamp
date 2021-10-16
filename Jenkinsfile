@@ -39,13 +39,13 @@ pipeline {
         stage('Building image') {
             steps {
                 sh '''
-                docker build -t escape-room .
+                docker build -t $APP_NAME .
                 '''
             }
         }
         stage('Deploy FE application') {
             steps {
-                withCredentials([usernameColonPassword(credentialsId: 'heroku', variable: 'HEROKU_PASS')]) {
+                withCredentials([string(credentialsId: 'heroku', variable: 'HEROKU_PASS')]) {
                 sh '''
                 docker login --username=_ --password=$HEROKU_PASS registry.heroku.com
                 heroku container:push web -a $APP_NAME
