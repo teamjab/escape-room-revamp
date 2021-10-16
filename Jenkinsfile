@@ -1,6 +1,13 @@
 pipeline {
     agent any
     stages {
+        stage('setup phase') {
+            steps {
+                sh '''
+                export PATH=/usr/local/bin
+                '''
+            }
+        }
         stage('Build') {
             steps {
                 sh '''
