@@ -19,15 +19,15 @@ pipeline {
                 '''
             }
         }
-        stage('JS Unit Test') {
-            steps {
-                sh '''
-                echo "JS unit test..."
-                cd "${APP_NAME}"
-                npm run test
-                '''
-            }
-        }
+        // stage('JS Unit Test') {
+        //     steps {
+        //         sh '''
+        //         echo "JS unit test..."
+        //         cd "${APP_NAME}"
+        //         npm run test
+        //         '''
+        //     }
+        // }
         stage('Go Unit Test') {
             steps {
                 sh '''
@@ -37,14 +37,7 @@ pipeline {
                 '''
             }
         }
-        stage('Building image') {
-            steps {
-                sh '''
-                docker build -t $APP_NAME .
-                '''
-            }
-        }
-        stage('Deploy FE application') {
+        stage('Build & Deploy FE application') {
             steps {
                 withCredentials([string(credentialsId: 'heroku', variable: 'HEROKU_PASS')]) {
                 sh '''
