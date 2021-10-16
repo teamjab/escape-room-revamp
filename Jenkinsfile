@@ -40,7 +40,6 @@ pipeline {
             steps {
                 sh '''
                 docker build -t escape-room .
-                docker tag escape-room $DOCKER_REGISTRY
                 '''
             }
         }
