@@ -7,6 +7,12 @@ pipeline {
     }
 
     stages {
+        stage('Pipeline setup') {
+            steps {
+                sh 'export PATH=$PATH:/usr/local/go/bin'
+            }
+        }
+
         stage('npm package install') {
             steps {
                 sh '''
