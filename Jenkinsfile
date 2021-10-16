@@ -6,6 +6,7 @@ pipeline {
                 sh '''
                 cd "escape-room"
                 npm install -y
+                echo "Done Installing packages"
                 '''
             }
         }
