@@ -1,5 +1,5 @@
 const user = {
-    username: 'Brendon',
+    username: '',
     score:0,
 }
 
