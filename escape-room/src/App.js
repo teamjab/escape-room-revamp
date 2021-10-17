@@ -1,13 +1,12 @@
 import userForm from "./components/userForm.js";
-import "./App.css";
+import {useSelector} from 'react-redux';
+
 
 function App() {
+  const name = useSelector( state => state);
   console.log(userForm);
-  // simple fetch
-  fetch('http://localhost:8080/')
-  .then(response => response.json())
-  .then(data => console.log(data))
-  .catch(err => console.error(err));
+  console.log(name.player);
+  
   return (
     <div className="App">
       <header className="App-header"></header>
