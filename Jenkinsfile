@@ -10,15 +10,15 @@ pipeline {
     }
 
     stages {
-        stage('NPM package install') {
-            steps {
-                sh '''
-                echo "Installing Packages..."
-                cd "${APP_NAME}"
-                npm install -y
-                '''
-            }
-        }
+        // stage('NPM package install') {
+        //     steps {
+        //         sh '''
+        //         echo "Installing Packages..."
+        //         cd "${APP_NAME}"
+        //         npm install -y
+        //         '''
+        //     }
+        // }
         // stage('JS Unit Test') {
         //     steps {
         //         sh '''
