@@ -14,4 +14,4 @@ COPY ./escape-room ./
 
 ARG PORT
 
-ENTRYPOINT ["npm", "start", "--port", $PORT]
+CMD ["npm", "start", "--port", $PORT]
