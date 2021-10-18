@@ -40,7 +40,7 @@ pipeline {
         stage('Deleting dangling images') {
             steps {
                 sh '''
-                docker image prune -f
+                docker image prune --filter 
                 '''
             }
         }
