@@ -37,13 +37,6 @@ pipeline {
                 '''
             }
         }
-        stage('Deleting dangling images') {
-            steps {
-                sh '''
-                docker image prune --filter 
-                '''
-            }
-        }
         stage('Build & Deploy FE application') {
             steps {
                 withCredentials([string(credentialsId: 'heroku', variable: 'HEROKU_PASS')]) {
