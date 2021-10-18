@@ -8,7 +8,7 @@ COPY ./escape-room/package.json ./
 
 COPY ./escape-room/package-lock.json ./
 
-RUN npm install --silent -y
+RUN npm install
 
 COPY ./escape-room ./
 
