@@ -31,6 +31,7 @@ pipeline {
         stage('Go Unit Test') {
             steps {
                 sh '''
+                echo "Testing backend service..."
                 export PATH=$PATH:/usr/local/go/bin
                 cd "${API_NAME}"
                 go test ./...
@@ -41,6 +42,7 @@ pipeline {
             steps {
                 withCredentials([string(credentialsId: 'heroku', variable: 'HEROKU_PASS')]) {
                 sh '''
+                echo "Deploying to https://escape-room-revamp.herokuapp.com"
                 docker login --username=_ --password=$HEROKU_PASS registry.heroku.com
                 heroku container:push web -a $HEROKU_APP_NAME
                 heroku container:release web -a $HEROKU_APP_NAME
