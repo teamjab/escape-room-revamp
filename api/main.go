@@ -4,13 +4,16 @@ package main
 
 import (
 	"encoding/json"
+	"io/ioutil"
 	"net/http"
 
 	log "github.com/sirupsen/logrus"
 
 	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
+	"github.com/joho/godotenv"
 
+	RiddleController "github.com/teamjab/escape-room-revamp/controllers"
 	Riddles "github.com/teamjab/escape-room-revamp/models"
 )
 
@@ -23,75 +26,37 @@ func homepage(w http.ResponseWriter, r *http.Request) {
 func getRiddle(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content Type", "application/json")
 	w.WriteHeader(http.StatusOK)
-	var riddles = []Riddles.Riddle{
-		{
-			Username: "Brendon",
-			Question: "Make a fist",
-			Answer: []Riddles.Answers{
-				{
-					AnswerOne:   "Punch yourself",
-					AnswerTwo:   "Punch Brendon",
-					AnswerThree: "Punch Brendon",
-					AnswerFour:  "Punch Brendon",
-				},
-			},
-		},
-		{
-			Username: "TeamJab",
-			Question: "What has to be broken before you can use it?",
-			Answer: []Riddles.Answers{
-				{
-					AnswerOne:   "An egg",
-					AnswerTwo:   "A life",
-					AnswerThree: "Brendon's face",
-					AnswerFour:  "Jin's face",
-				},
-			},
-		},
-		{
-			Username: "TeamJab",
-			Question: "What month of the year has 28 days?",
-			Answer: []Riddles.Answers{
-				{
-					AnswerOne:   "Febuary",
-					AnswerTwo:   "March",
-					AnswerThree: "All of them",
-					AnswerFour:  "DecemberMarch",
-				},
-			},
-		},
-		{
-			Username: "TeamJab",
-			Question: "What has a head and a tail but no body?",
-			Answer: []Riddles.Answers{
-				{
-					AnswerOne:   "Brendon",
-					AnswerTwo:   "Jin",
-					AnswerThree: "Life",
-					AnswerFour:  "Coin",
-				},
-			},
-		},
-		{
-			Username: "TeamJab",
-			Question: "What can travel all around the world without leaving its corner?",
-			Answer: []Riddles.Answers{
-				{
-					AnswerOne:   "My car",
-					AnswerTwo:   "Air plane",
-					AnswerThree: "Yo mama",
-					AnswerFour:  "A stamp",
-				},
-			},
-		},
-	}
+	riddles := RiddleController.GetRiddles()
 	json.NewEncoder(w).Encode(riddles)
+}
+
+func createRiddle(w http.ResponseWriter, r *http.Request) {
+	var newRiddle Riddles.Riddle
+
+	reqBody, err := ioutil.ReadAll(r.Body)
+
+	if err != nil {
+		log.Error(err)
+	}
+
+	json.Unmarshal(reqBody, &newRiddle)
+
+	status_code := RiddleController.CreateRiddles(newRiddle)
+
+	if status_code == 200 {
+		w.WriteHeader(http.StatusOK)
+		w.Header().Set("Content Type", "application/json")
+		json.NewEncoder(w).Encode(newRiddle)
+	} else {
+		w.WriteHeader(http.StatusBadRequest)
+	}
 }
 
 func requestHandler() {
 	router := mux.NewRouter()
-	router.HandleFunc("/", homepage)
-	router.HandleFunc("/riddles", getRiddle)
+	router.HandleFunc("/", homepage).Methods("GET")
+	router.HandleFunc("/riddles", getRiddle).Methods("GET")
+	router.HandleFunc("/riddles", createRiddle).Methods("POST")
 
 	originsOk := handlers.AllowedOrigins([]string{"http://localhost:3000"})
 	methodsOk := handlers.AllowedMethods([]string{"GET", "POST"})
@@ -102,5 +67,6 @@ func requestHandler() {
 
 func main() {
 	log.SetFormatter(&log.JSONFormatter{})
+	godotenv.Load()
 	requestHandler()
 }
