@@ -1,5 +1,8 @@
 import userForm from "./components/userForm.js";
 import {useSelector} from 'react-redux';
+import './styling/App.scss';
+
+
 
 
 function App() {
@@ -11,7 +14,18 @@ function App() {
     <div className="App">
       <header className="App-header"></header>
       <main>
-        <h1>Escape-Room</h1>
+        <h1>
+        <span>E</span>
+        <span>s</span>
+        <span>c</span>
+        <span>a</span>
+        <span>p</span>
+        <span>e</span>
+        <span>R</span>
+        <span>o</span>
+        <span>o</span>
+        <span>m!</span>
+        </h1>
         <form>
           <label>Username: </label>
           <input placeholder="enter username"></input>
