@@ -1,3 +1,6 @@
+import { BrowserRouter as Router, Link } from "react-router-dom";
+
+
 
 const Landing = () => {
     return (
@@ -14,6 +17,13 @@ const Landing = () => {
           <span>o</span>
           <span>m!</span>
           </h1>
+          <form>
+            <label>Username: </label>
+            <input placeholder="enter username"></input>
+          </form>
+          <Link to="/game">
+            <button type='button'>Play!</button>
+          </Link>
         </main>
     )
   };

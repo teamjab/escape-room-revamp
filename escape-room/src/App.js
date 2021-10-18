@@ -1,9 +1,8 @@
 import userForm from "./components/userForm.js";
 import {useSelector} from 'react-redux';
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import './styling/App.scss';
 import Landing from './pages/landing/landing.js';
-import Game from './pages/game/game.js';
 
 
 
@@ -17,12 +16,11 @@ function App() {
       <div className="App">
         <header className="App-header"></header>
         <main>
-          <Landing></Landing>
-          <form>
-              <label>Username: </label>
-              <input placeholder="enter username"></input>
-          </form>
-          <button type="submit">Submit</button>
+          <Switch>
+            <Route exact path='/'>
+              <Landing/>
+            </Route>
+          </Switch>
         </main>
         <footer>
           <h4>Team Jab</h4>
