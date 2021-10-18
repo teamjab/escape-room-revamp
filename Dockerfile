@@ -14,4 +14,6 @@ COPY ./escape-room ./
 
 ARG PORT
 
-CMD ["npm", "run", "start", "--port", $PORT]
+RUN npm run build
+
+CMD ["npm", "run", "start"]
