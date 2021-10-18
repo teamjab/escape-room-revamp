@@ -8,7 +8,7 @@ type Answers struct {
 }
 
 type Riddle struct {
-	Username string    `json:"Username"`
-	Question string    `json:"Question"`
-	Answer   []Answers `json:"Answers"`
+	Username string    `bson:"Username"`
+	Question string    `bson:"Question"`
+	Answer   []Answers `bson:"Answers"`
 }
