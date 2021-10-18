@@ -1,4 +1,4 @@
-FROM node:lts-alpine3.14
+FROM node:alpine
 
 WORKDIR /app
 
@@ -14,4 +14,4 @@ COPY ./escape-room ./
 
 ARG PORT
 
-CMD ["npm", "start", "--port", $PORT]
+CMD ["npm", "run", "start", "--port", $PORT]
