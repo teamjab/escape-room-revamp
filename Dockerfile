@@ -1,4 +1,4 @@
-FROM node:lts-alpine3.14
+FROM node:latest
 
 WORKDIR /app
 
@@ -8,10 +8,12 @@ COPY ./escape-room/package.json ./
 
 COPY ./escape-room/package-lock.json ./
 
-RUN npm install --silent -y
+RUN npm install
 
 COPY ./escape-room ./
 
 ARG PORT
 
-ENTRYPOINT ["npm", "start", "--port", $PORT]
+RUN npm run build
+
+CMD ["npm", "run", "start"]

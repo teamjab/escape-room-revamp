@@ -12,6 +12,7 @@ describe('testing to see if jest works', () => {
 })
 
 // happy path should be a 200
+// sad path should not be 200
 describe('API Testing (local server)', () => {
     test('API validation (happy Path)', async done => {
         const response = await request.get('/api')
