@@ -10,7 +10,7 @@ pipeline {
     }
 
     stages {
-        stage('npm package install') {
+        stage('NPM package install') {
             steps {
                 sh '''
                 echo "Installing Packages..."
@@ -34,6 +34,13 @@ pipeline {
                 export PATH=$PATH:/usr/local/go/bin
                 cd "${API_NAME}"
                 go test ./...
+                '''
+            }
+        }
+        stage('Deleting dangling images') {
+            steps {
+                sh '''
+                docker image prune -f
                 '''
             }
         }
