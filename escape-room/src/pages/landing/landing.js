@@ -2,7 +2,7 @@ import {Link} from 'react-router-dom';
 import '../../styling/landing/landing.scss';
 const Landing = () => {
     return (
-        <main>
+        <main className="landing-page">
             <h1>
             <span>E</span>
             <span>s</span>
