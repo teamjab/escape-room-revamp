@@ -15,9 +15,13 @@ var clientInstanceError error
 
 var mongoOnce sync.Once
 
+/*
+Constant variables
+*/
 const (
 	DBNAME       = "escape_room_revamp" // name of the db
 	RIDDLE_ISSUE = "escape_riddle"
+	SCORE_ISSUE = "escape_score"
 )
 
 /*
