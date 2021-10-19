@@ -5,6 +5,8 @@ import (
 
 	log "github.com/sirupsen/logrus"
 	Riddles "github.com/teamjab/escape-room-revamp/models"
+	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/mongo"
 
 	connectionhelper "github.com/teamjab/escape-room-revamp/db"
 )
@@ -20,6 +22,8 @@ func CreateRiddles(riddle Riddles.Riddle) int {
 		return 400
 	}
 
+	log.Info("Posting riddle into the db")
+
 	collection := client.Database(connectionhelper.DBNAME).Collection(connectionhelper.RIDDLE_ISSUE)
 
 	_, err = collection.InsertOne(context.TODO(), riddle)
@@ -32,8 +36,46 @@ func CreateRiddles(riddle Riddles.Riddle) int {
 	}
 }
 
-func GetRiddles() []Riddles.Riddle {
-	var riddles = []Riddles.Riddle{
+func GetRiddles() ([]Riddles.Riddle, error) {
+
+	log.Info("Getting riddles from the db...")
+
+	riddles := mockRiddles()
+
+	filter := bson.D{{}}
+
+	client, err := connectionhelper.ConnectDB()
+
+	if err != nil {
+		return riddles, err
+	}
+
+	collection := client.Database(connectionhelper.DBNAME).Collection(connectionhelper.RIDDLE_ISSUE)
+
+	riddlesCol, dbError := collection.Find(context.TODO(), filter)
+
+	if dbError != nil {
+		return riddles, dbError
+	}
+
+	for riddlesCol.Next(context.TODO()) {
+		rid := Riddles.Riddle{}
+		err := riddlesCol.Decode(&rid)
+		if err != nil {
+			return riddles, err
+		}
+		riddles = append(riddles, rid)
+	}
+
+	riddlesCol.Close(context.TODO())
+	if len(riddles) == 0 {
+		return riddles, mongo.ErrNoDocuments
+	}
+	return riddles, nil
+}
+
+func mockRiddles() []Riddles.Riddle {
+	return []Riddles.Riddle{
 		{
 			Username: "Brendon",
 			Question: "Make a fist",
@@ -95,5 +137,4 @@ func GetRiddles() []Riddles.Riddle {
 			},
 		},
 	}
-	return riddles
 }

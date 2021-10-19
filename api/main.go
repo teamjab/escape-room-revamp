@@ -26,7 +26,10 @@ func homepage(w http.ResponseWriter, r *http.Request) {
 func getRiddle(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content Type", "application/json")
 	w.WriteHeader(http.StatusOK)
-	riddles := RiddleController.GetRiddles()
+	riddles, err := RiddleController.GetRiddles()
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+	}
 	json.NewEncoder(w).Encode(riddles)
 }
 
