@@ -1,3 +1,5 @@
+
+import '../../styling/game/game.scss';
 const Game = () => {
     return <h1>Game page</h1>;
   };
