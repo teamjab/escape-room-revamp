@@ -16,7 +16,7 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route path='/' exact component={Landing} className='landing'/>
+        <Route path='/' exact component={Landing}/>
         <Route path='/game'exact component={Game}/>
       </Switch>
     </Router>
