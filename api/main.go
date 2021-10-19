@@ -13,28 +13,37 @@ import (
 	"github.com/gorilla/mux"
 	"github.com/joho/godotenv"
 
-	RiddleController "github.com/teamjab/escape-room-revamp/controllers"
-	Riddles "github.com/teamjab/escape-room-revamp/models"
+	ApiHandlers "github.com/teamjab/escape-room-revamp/controllers"
+	Models "github.com/teamjab/escape-room-revamp/models"
 )
 
+/*
+Proof of life homepage
+*/
 func homepage(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 	w.Write([]byte(`{"proof of life": "true"}`))
 }
 
+/*
+Getting all the riddles that are premade and from the DB
+*/
 func getRiddle(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content Type", "application/json")
 	w.WriteHeader(http.StatusOK)
-	riddles, err := RiddleController.GetRiddles()
+	riddles, err := ApiHandlers.GetRiddles()
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
 	}
 	json.NewEncoder(w).Encode(riddles)
 }
 
+/*
+Creating a riddles and posting it to the DB
+*/
 func createRiddle(w http.ResponseWriter, r *http.Request) {
-	var newRiddle Riddles.Riddle
+	var newRiddle Models.Riddle
 
 	reqBody, err := ioutil.ReadAll(r.Body)
 
@@ -44,7 +53,7 @@ func createRiddle(w http.ResponseWriter, r *http.Request) {
 
 	json.Unmarshal(reqBody, &newRiddle)
 
-	status_code := RiddleController.CreateRiddles(newRiddle)
+	status_code := ApiHandlers.CreateRiddles(newRiddle)
 
 	if status_code == 200 {
 		w.WriteHeader(http.StatusOK)
@@ -55,11 +64,55 @@ func createRiddle(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+/*
+Getting all the scores from the DB
+*/
+func getScores(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	aggregateScores, err := ApiHandlers.GetAllScore()
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+	}
+	json.NewEncoder(w).Encode(aggregateScores)
+}
+
+/*
+Creating a score info and posting it to the DB
+*/
+func createScoreInfo(w http.ResponseWriter, r *http.Request) {
+	var scoreInfo Models.Scores
+
+	reqBody, err := ioutil.ReadAll(r.Body)
+
+	if err != nil {
+		log.Error(err)
+	}
+
+	json.Unmarshal(reqBody, &scoreInfo)
+
+	log.Info(scoreInfo)
+	status_code := ApiHandlers.CreateScore(scoreInfo)
+
+	if status_code == 200 {
+		w.WriteHeader(http.StatusOK)
+		w.Header().Set("Content Type", "application/json")
+		json.NewEncoder(w).Encode(scoreInfo)
+	} else {
+		w.WriteHeader(http.StatusBadRequest)
+	}
+}
+
+/*
+All of the routes
+*/
 func requestHandler() {
 	router := mux.NewRouter()
 	router.HandleFunc("/", homepage).Methods("GET")
 	router.HandleFunc("/riddles", getRiddle).Methods("GET")
 	router.HandleFunc("/riddles", createRiddle).Methods("POST")
+	router.HandleFunc("/scores", createScoreInfo).Methods("POST")
+	router.HandleFunc("/scores", getScores).Methods("GET")
 
 	originsOk := handlers.AllowedOrigins([]string{"http://localhost:3000"})
 	methodsOk := handlers.AllowedMethods([]string{"GET", "POST"})

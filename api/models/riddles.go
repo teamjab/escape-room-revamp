@@ -1,4 +1,4 @@
-package Riddles
+package Models
 
 type Answers struct {
 	AnswerOne   string

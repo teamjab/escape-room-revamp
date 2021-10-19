@@ -1,4 +1,4 @@
-package Riddles
+package Models
 
 import "testing"
 
@@ -8,7 +8,7 @@ func TestAbleToInitializeAnswerObject(t *testing.T) {
 	}
 
 	if testAnswers.AnswerOne == "" || testAnswers.AnswerOne != "Hello" {
-		t.Fatalf("Unable to initialize Answer object")
+		t.Errorf("Unable to initialize Answer object")
 	}
 }
 
@@ -17,6 +17,6 @@ func TestAbleToInitializeRiddleObject(t *testing.T) {
 		Question: "testing",
 	}
 	if testRiddle.Question == "" || testRiddle.Question != "testing" {
-		t.Fatalf("Unable to initialize Riddle object")
+		t.Errorf("Unable to initialize Riddle object")
 	}
 }
