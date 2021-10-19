@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"io/ioutil"
 	"net/http"
+	"os"
 
 	log "github.com/sirupsen/logrus"
 
@@ -117,8 +118,9 @@ func requestHandler() {
 	originsOk := handlers.AllowedOrigins([]string{"http://localhost:3000"})
 	methodsOk := handlers.AllowedMethods([]string{"GET", "POST"})
 
-	log.Info("Server running on 8080")
-	log.Error(http.ListenAndServe(":8080", handlers.CORS(originsOk, methodsOk)(router)))
+	PORT := os.Getenv("PORT")
+	log.Info("Server running on " + PORT)
+	log.Error(http.ListenAndServe(":"+PORT, handlers.CORS(originsOk, methodsOk)(router)))
 }
 
 func main() {
