@@ -1,4 +1,17 @@
 .game-page {
     height: 100vh;
-    background: red;
+    background:url('https://images.freeimages.com/images/large-previews/fad/dark-room-1513381.jpg') no-repeat;
+    background-size: cover;
+    animation: enterRoomAnimation ease 4s;
+    animation-iteration-count:1;
+    animation-fill-mode: forwards;
+}
+  
+@keyframes enterRoomAnimation {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+     }
 }
