@@ -5,6 +5,8 @@
     animation: enterRoomAnimation ease 4s;
     animation-iteration-count:1;
     animation-fill-mode: forwards;
+    color: white;
+    stroke:2px aquamarine;
 }
   
 @keyframes enterRoomAnimation {
