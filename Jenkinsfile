@@ -7,6 +7,7 @@ pipeline {
         DOCKER_REGISTRY = "teamjab/escape-room"
         DOCKER_REGISTRY_CREDS = 'dockerhub'
         HEROKU_APP_NAME="escape-room-revamp"
+        HEROKU_API_NAME="escape-room-revamp-api"
     }
 
     stages {
@@ -46,6 +47,20 @@ pipeline {
                 docker login --username=_ --password=$HEROKU_PASS registry.heroku.com
                 heroku container:push web -a $HEROKU_APP_NAME
                 heroku container:release web -a $HEROKU_APP_NAME
+                '''
+            }
+          }
+        }
+
+        stage('Build & Deploy BE application') {
+            steps {
+                withCredentials([string(credentialsId: 'heroku', variable: 'HEROKU_PASS')]) {
+                sh '''
+                echo "Deploying to https://escape-room-revamp-api.herokuapp.com"
+                cd api
+                docker login --username=_ --password=$HEROKU_PASS registry.heroku.com
+                heroku container:push web -a $HEROKU_API_NAME
+                heroku container:release web -a $HEROKU_API_NAME
                 '''
             }
           }
