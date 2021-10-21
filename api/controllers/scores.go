@@ -16,8 +16,8 @@ Saving the score to the db
 Score has to be int type and username has to be string type
 */
 func CreateScore(scoreInfo Models.Scores) int {
-	if scoreInfo.Score == 0 || scoreInfo.Username == "" {
-		log.Error("Provide valid input")
+	if scoreInfo.Username == "" {
+		log.Error("Invalid input...")
 		return 400
 	}
 
