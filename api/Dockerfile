@@ -1,6 +1,6 @@
 # Base image
 ARG GO_IMAGE_VERSION=1.16-alpine
-FROM golang:${GO_IMAGE_VERSION}}
+FROM golang:${GO_IMAGE_VERSION}
 
 # cd into /app
 WORKDIR /app
