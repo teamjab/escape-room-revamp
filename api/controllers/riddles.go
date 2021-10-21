@@ -15,7 +15,8 @@ import (
 Saving the riddles that are passed from the front end to the db
 */
 func CreateRiddles(riddle Models.Riddle) int {
-	if riddle.Answer == nil || riddle.Question == "" || riddle.Username == "" {
+	if riddle.Answer == nil || riddle.Question == "" || riddle.Username == "" || riddle.CorrectAnswer == "" {
+		log.Error("Enter valid input for riddle...")
 		return 400
 	}
 
@@ -34,9 +35,10 @@ func CreateRiddles(riddle Models.Riddle) int {
 	_, err = collection.InsertOne(context.TODO(), riddle)
 
 	if err != nil {
-		log.Error(err)
+		log.Error("Unable to save to db")
 		return 400
 	} else {
+		log.Info("Succesfully posted!")
 		return 200
 	}
 }
@@ -97,6 +99,7 @@ func mockRiddles() []Models.Riddle {
 					AnswerFour:  "Punch Brendon",
 				},
 			},
+			CorrectAnswer: "Punch yourself",
 		},
 		{
 			Username: "TeamJab",
@@ -109,6 +112,7 @@ func mockRiddles() []Models.Riddle {
 					AnswerFour:  "Jin's face",
 				},
 			},
+			CorrectAnswer: "An egg",
 		},
 		{
 			Username: "TeamJab",
@@ -121,6 +125,7 @@ func mockRiddles() []Models.Riddle {
 					AnswerFour:  "DecemberMarch",
 				},
 			},
+			CorrectAnswer: "All of them",
 		},
 		{
 			Username: "TeamJab",
@@ -133,6 +138,7 @@ func mockRiddles() []Models.Riddle {
 					AnswerFour:  "Coin",
 				},
 			},
+			CorrectAnswer: "Coin",
 		},
 		{
 			Username: "TeamJab",
@@ -145,6 +151,7 @@ func mockRiddles() []Models.Riddle {
 					AnswerFour:  "A stamp",
 				},
 			},
+			CorrectAnswer: "A stamp",
 		},
 	}
 }

@@ -62,6 +62,7 @@ func createRiddle(w http.ResponseWriter, r *http.Request) {
 		json.NewEncoder(w).Encode(newRiddle)
 	} else {
 		w.WriteHeader(http.StatusBadRequest)
+		json.NewEncoder(w).Encode("Bad Request")
 	}
 }
 
@@ -101,6 +102,7 @@ func createScoreInfo(w http.ResponseWriter, r *http.Request) {
 		json.NewEncoder(w).Encode(scoreInfo)
 	} else {
 		w.WriteHeader(http.StatusBadRequest)
+		json.NewEncoder(w).Encode("Bad Request")
 	}
 }
 
