@@ -1,20 +1,19 @@
-const user = {
+const player = {
     username: '',
     score:0,
 }
 
-export default function useReducer( state = user, action) {
-    const {type, payload} = action;
-    switch(type) {
-        case 'INITIALIZE':
-            return{...state,user:payload}
-            default:return state
-    }
+function playerReducer(state = player, action) {
+    switch(action.type) {
+        case 'name': {
+            return {
+                ...state,
+                username:action.payload,
+            }
+        }
+        default:
+    }    
+    return state
 }
 
-export const User = (payload) => {
-    return {
-        type:'INITIALIZE',
-        payload:payload,
-    }
-}
+export default playerReducer;

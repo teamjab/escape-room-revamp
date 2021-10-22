@@ -1,0 +1,26 @@
+
+.landing-page {
+    background:url('https://images.freeimages.com/images/large-previews/1d6/spooky-creepy-haunted-house-1475593.jpg') no-repeat;
+    background-size:cover;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+h1{
+    font-family: 'Permanent Marker', cursive;
+    font-size: 5em;
+    margin: 0;
+    
+}
+h1 :nth-child(odd) {
+    color: 	#ff6700;
+    -webkit-text-stroke: 2px black;
+    
+}
+h1 :nth-child(even) {
+    -webkit-text-stroke: 2px #ff6700;
+    
+}

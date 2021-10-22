@@ -1,12 +1,7 @@
-import useReducer from './userReducer.js';
-import {createStore, combineReducers} from 'redux';
+import playerReducer from './userReducer.js';
+import {createStore} from 'redux';
 
-const reducer = combineReducers({
-    user:useReducer,
-})
 
-const store = () => {
-    return createStore(reducer);
-}
+const store = createStore(playerReducer);
 
-export default store();
+export default store;
