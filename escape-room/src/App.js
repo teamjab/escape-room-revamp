@@ -1,17 +1,17 @@
-import userForm from "./components/userForm.js";
 import {useSelector} from 'react-redux';
 import Landing from './pages/landing/landing.js';
 import Game from './pages/game/game.js';
 import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import './styling/App.scss';
+import store from './store/store.js';
+
 
 
 
 
 function App() {
-  const name = useSelector( state => state);
-  console.log(userForm);
-  console.log(name.player);
+console.log('initial State', store.getState());
+store.dispatch({ type: 'name', payload: 'brendon' })
   
   return (
     <Router>

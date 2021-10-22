@@ -1,6 +1,11 @@
+
+import { useSelector } from 'react-redux';
 import {Link} from 'react-router-dom';
 import '../../styling/landing/landing.scss';
 const Landing = () => {
+  const user = useSelector( state => state);
+  console.log(user);
+
     return (
         <main className="landing-page">
             <h1>
