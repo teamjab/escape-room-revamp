@@ -11,6 +11,12 @@ function playerReducer(state = player, action) {
                 username:action.payload,
             }
         }
+        case 'score': {
+            return {
+                ...state,
+                score:action.payload,
+            }
+        }
         default:
     }    
     return state
