@@ -1,11 +1,16 @@
 import store from '../../store/store';
 import {Link} from 'react-router-dom';
 import '../../styling/landing/landing.scss';
+import fetchRiddles from '../game/riddlesFetch.js';
 const Landing = () => {
 
   const getName = (event) => {
-    console.log(event.target.value);
+    // console.log(event.target.value);
     store.dispatch({ type: 'name', payload: event.target.value })
+  }
+
+  const getRiddles = () => {
+    store.dispatch({type:'getriddles', payload:fetchRiddles() });
   }
 
     return (
@@ -27,7 +32,7 @@ const Landing = () => {
               <input onChange={getName} placeholder="enter username"></input>
             </form>
             <Link to="/game">
-              <button type='submit'>Play!</button>
+              <button onClick={getRiddles} type='submit'>Play!</button>
             </Link>
           </main>
     )
