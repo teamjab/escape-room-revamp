@@ -1,13 +1,11 @@
 import store from '../../store/store';
 import {Link} from 'react-router-dom';
 import '../../styling/landing/landing.scss';
-import { useState } from 'react';
 const Landing = () => {
 
   const getName = (event) => {
     console.log(event.target.value);
     store.dispatch({ type: 'name', payload: event.target.value })
-    store.dispatch({ type: 'score', payload: 1 })
   }
 
     return (

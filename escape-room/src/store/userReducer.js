@@ -3,6 +3,7 @@ const player = {
     score:0,
 }
 
+
 function playerReducer(state = player, action) {
     switch(action.type) {
         case 'name': {
