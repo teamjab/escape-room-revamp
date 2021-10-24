@@ -3,12 +3,19 @@ const player = {
     score:0,
 }
 
+
 function playerReducer(state = player, action) {
     switch(action.type) {
         case 'name': {
             return {
                 ...state,
                 username:action.payload,
+            }
+        }
+        case 'score': {
+            return {
+                ...state,
+                score:action.payload,
             }
         }
         default:

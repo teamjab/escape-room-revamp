@@ -1,7 +1,7 @@
-import playerReducer from './userReducer.js';
+import reducers from './rootReducer.js';
 import {createStore} from 'redux';
 
 
-const store = createStore(playerReducer);
+const store = createStore(reducers);
 
 export default store;
