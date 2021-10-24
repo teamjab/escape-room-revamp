@@ -1,12 +1,15 @@
-
+import store from "../../store/store";
 
 const url = 'https://escape-room-revamp-api.herokuapp.com/riddles';
 
-const fetchRiddles = () => {
-    fetch(url)
-    .then(response => response.json())
-    // .then(data => console.log(data))
-    .catch(error => console.error(error));
-}
 
+const fetchRiddles = async () => {
+
+   await fetch(url)
+    .then(res => res.json())
+    .then(json => {
+      store.dispatch({type:'getriddles', payload:json });
+    })
+}
+console.log(store.getState())
 export default fetchRiddles;

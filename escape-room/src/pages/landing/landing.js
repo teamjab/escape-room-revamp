@@ -9,10 +9,6 @@ const Landing = () => {
     store.dispatch({ type: 'name', payload: event.target.value })
   }
 
-  const getRiddles = () => {
-    store.dispatch({type:'getriddles', payload:fetchRiddles() });
-  }
-
     return (
         <main className="landing-page">
             <h1>
@@ -32,7 +28,7 @@ const Landing = () => {
               <input onChange={getName} placeholder="enter username"></input>
             </form>
             <Link to="/game">
-              <button onClick={getRiddles} type='submit'>Play!</button>
+              <button onClick={fetchRiddles} type='submit'>Play!</button>
             </Link>
           </main>
     )

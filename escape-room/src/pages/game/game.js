@@ -4,7 +4,8 @@ function Game() {
     
   const player = store.getState();
   const playerName = player.player.username;
-  console.log(player);
+  const riddle = store.getState();
+
 
     return (
       <main className='game-page'>
