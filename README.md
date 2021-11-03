@@ -16,7 +16,7 @@
     - as a user, I want to Play a game of riddles that grants me points based on correct answers.
     - As a user, I want to enter my name before playing so I can save my score in a database.
     - As a user, I want the theme to be scary and describe a horror-esque scene.
-    - As a user, I want to see other users scores that come from a database. 
+    - As a user, I want to see other users scores that come from a database.
 
 
 ## Description
